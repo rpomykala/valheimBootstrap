@@ -14,9 +14,11 @@ export PROXY_URL=
 # NOTE: You need to make sure the ports 2456-2458 is being forwarded to your server through your local router & firewall.
 ~/.steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir ~/Valheim +app_update 896660 +quit
 
-./valheim_server.x86_64 -name $SERVER_NAME -port 2456 -world $SERVER_NAME -password "password" -public 1 > /dev/null &
+# Make sure to change the password and only give it to friends that you want to connect to your server
+export CLIENT_PASSWORD=
+./valheim_server.x86_64 -name $SERVER_NAME -port 2456 -world $SERVER_NAME -password $CLIENT_PASSWORD -public 1 > /dev/null &
 
-./mr2_linux_amd64 client -s $PROXY_URL -p "password" -P 2456 -c 127.0.0.1:2456 &
+./mr2_linux_amd64 client -s $PROXY_URL -p "backend_password" -P 2456 -c 127.0.0.1:2456 &
 
 export LD_LIBRARY_PATH=$templdpath
 
