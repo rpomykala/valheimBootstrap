@@ -44,3 +44,12 @@ GOOS=linux GOARCH=amd64 go build -o mr2_linux_amd64
 cp mr2_linux_amd64 ~
 
 
+# Permission for backup logs
+
+sudo touch /var/log/backup.log
+sudo touch /var/log/backup.err.log
+sudo chown $username:$username /var/log/backup.err.log
+sudo chown $username:$username /var/log/backup.log
+crontab <<EOF
+*/10 * * * * /home/$username/backup.sh
+EOF

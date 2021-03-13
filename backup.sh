@@ -5,8 +5,11 @@ export S3_BUCKET_NAME=
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=
 
+exec >>/var/log/backup.log 2>>/var/log/backup.err.log
+
 now=$(date +%s)
 backup_filename="valheim-backup.tar.bz2.$now"
+cd ~
 
 echo $backup_filename
 cp valheim-backup.tar.bz2 $backup_filename && rm valheim-backup.tar.bz2
