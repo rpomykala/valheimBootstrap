@@ -51,5 +51,5 @@ sudo touch /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.log
 crontab <<EOF
-*/10 * * * * /home/$username/backup.sh
+0 */6 * * * /home/$username/backup.sh
 EOF
