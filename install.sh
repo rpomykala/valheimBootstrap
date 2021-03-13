@@ -50,6 +50,3 @@ sudo touch /var/log/backup.log
 sudo touch /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.log
-crontab <<EOF
-0 */6 * * * /home/$username/backup.sh
-EOF
