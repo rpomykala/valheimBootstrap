@@ -14,7 +14,7 @@ resource "aws_instance" "cie_udp_proxy" {
                 go get
                 GOOS=linux GOARCH=amd64 go build -o mr2_linux_amd64
                 cp mr2_linux_amd64 ~
-                nohup mr2_linux_amd64 server -l 2456 -p password
+                nohup mr2_linux_amd64 server -l 3000 -p password
                 EOF
 
 }
@@ -22,6 +22,16 @@ resource "aws_instance" "cie_udp_proxy" {
 resource "aws_security_group" "allow_udp_tcp" {
     name        = "allow_game_traffic"
     description = "Allow UDP & TCP inbound traffic"
+
+
+    ingress {
+        description = "Your game server IP"
+        from_port   = 3000
+        to_port     = 3000
+        protocol    = "udp"
+        # Make sure to change this IP address to your game server's address
+        cidr_blocks = ["127.0.0.1/32"]
+    } 
 
     ingress {
         description = "UDP from VPC"

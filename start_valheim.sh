@@ -7,7 +7,7 @@
 # Place those files inside ~/.config/unity3d/IronGate/Valheim/worlds
 # If this is a new server, give it a unique name.
 export SERVER_NAME=
-export PROXY_URL=
+export PROXY_URL=:3000
 # Make sure to change the password and only give it to friends that you want to connect to your server
 export CLIENT_PASSWORD=
 
@@ -25,7 +25,7 @@ export SteamAppId=892970
 
 ./valheim_server.x86_64 -name $SERVER_NAME -port 2456 -world $SERVER_NAME -password $CLIENT_PASSWORD -public 1 > /dev/null &
 
-./mr2_linux_amd64 client -s $PROXY_URL -p "backend_password" -P 2456 -c 127.0.0.1:2456 &
+./mr2_linux_amd64 client -s $PROXY_URL -p "backend_password" -P 2456  -c 127.0.0.1:2456 &
 
 export LD_LIBRARY_PATH=$templdpath
 
