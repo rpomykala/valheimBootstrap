@@ -11,14 +11,18 @@ if ! [ -x "$(command -v go)" ]; then
   exit 1
 fi
 
+if ! [ -x "$(command -v steamcmd)" ]; then
+  echo 'Error: golang is not installed.' >&2
+  exit 1
+fi
+
 if ! [ -x "$(command -v aws)" ]; then
   echo 'Warning: AWS CLI is not installed. Automatic backups will not be possible' 
 fi
 
 
 # Installing SteamCMD https://developer.valvesoftware.com/wiki/SteamCMD
-sudo apt install steamcmd
-sudo useradd -m steam
+
 cd ~ && mkdir Valheim
 .steam/steamcmd/steamcmd.sh +login anonymous +force_install_dir ~/Valheim +app_update 896660 validate +exit
 cp start_valheim.sh ~/Valheim/
