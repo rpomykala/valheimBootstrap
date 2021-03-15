@@ -20,6 +20,7 @@ if ! [ -x "$(command -v aws)" ]; then
   echo 'Warning: AWS CLI is not installed. Automatic backups will not be possible' 
 fi
 
+username=$(whoami)
 
 # Permission for backup logs
 
@@ -27,6 +28,8 @@ sudo touch /var/log/backup.log
 sudo touch /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.err.log
 sudo chown $username:$username /var/log/backup.log
+sed -i "s/username/$username/g" backup.sh
+
 
 # Installing SteamCMD https://developer.valvesoftware.com/wiki/SteamCMD
 
@@ -44,7 +47,6 @@ GOOS=linux GOARCH=amd64 go build -o mr2_linux_amd64
 cp mr2_linux_amd64 ~
 
 # Creating a valheim Service
-username=$(whoami)
 sed -i "s/username/$username/g" valheim.service
 sed -i "s/username/$username/g" proxyreverse.service
 sudo cp proxyreverse.service /etc/systemd/system

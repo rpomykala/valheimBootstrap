@@ -1,0 +1,15 @@
+[Unit]
+Description=Valheim Proxy Service
+Wants=network.target
+After=syslog.target network-online.target
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+User=username
+WorkingDirectory=/home/username/Valheim
+ExecStart=/home/username/mr2_linux_amd64 client -s $PROXY_URL -p "backend_password" -P 2456 -c 127.0.0.1:2456
+
+[Install]
+WantedBy=multi-user.target
